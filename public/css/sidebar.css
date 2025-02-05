@@ -1,0 +1,38 @@
+.sidecolor {
+    background-color: #C74B3B;
+}
+
+.nav-link.active,
+.nav-link.active:hover {
+    color: white !important; /* Ensure white color */
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Slight color change on hover */
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slight color change on hover */
+}
+
+.nav-link {
+    color: white !important; /* Ensure white color */
+   
+    text-decoration: none; /* Remove underline from links */
+}
+
+
+
+.sidecolor {
+    position: fixed; /* Fix the sidebar position */
+  
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+  /* Ensure sidebar is on top of other content */
+    background-color: #C74B3B;
+   
+}
+
+#content-wrapper {
+    margin-left: 240px; /* Adjust content margin to accommodate sidebar width */
+}
