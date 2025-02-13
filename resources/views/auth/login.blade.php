@@ -10,13 +10,15 @@
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
     
     <style>
@@ -36,19 +38,53 @@
             height: 100%;
             }
             }
+
+            .loading-screen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .spinner {
+            width: 150px;
+            height: 150px;
+            border: 5px solid #f3f3f3;
+            margin-left: 95vh; 
+            margin-top: 37vh; 
+            border-top: 5px solid #C74B3B;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 
 </head>
 <body>
+  
 
 
-<section class="vh-100">
+<a href="/" class="clickable-heading-login none" style = "text-decoration: none; " id="loginButton" >  
+<button type="button" style = "margin-top: 20px; margin-left: 30px;" class="btn btn-primary">Back</button>
+
+        </a>
+
+<section class="vh-90" style = "margin-top: 10vh;" >
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image">
+        <img src="{{ asset('img/journey.png') }}" style = "margin-left: 130px;" alt="Logo" class="img-fluid" alt="Sample image">
       </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1" style = "margin-right: 200px;" >
         <form method="POST" action="{{ route('login') }}">
           @csrf
           
@@ -101,16 +137,25 @@
       </div>
     </div>
   </div>
-  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-    <div class="text-white mb-3 mb-md-0">Copyright © 2020. All rights reserved.</div>
-    <div>
-      <a href="#" class="text-white me-4"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="text-white me-4"><i class="fab fa-twitter"></i></a>
-      <a href="#" class="text-white me-4"><i class="fab fa-google"></i></a>
-      <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-  </div>
 </section>
+
+
+<script>
+        $(document).ready(function(){
+            // Hide loading screen after page load
+            $("#loadingScreen").fadeOut();
+        });
+
+        $("#loginButton, #registerButton").click(function(event) {
+            event.preventDefault(); // Prevent immediate navigation
+            $("#loadingScreen").fadeIn();
+            
+            let newPage = $(this).attr("href");
+            setTimeout(function() {
+                window.location.href = newPage;
+            }, 1000); // Delay navigation for 1 second
+        });
+    </script>
 
     
 </body>
